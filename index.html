@@ -3,6 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crazy Arcade Zone | Play Free Games</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f1a; color: #fff; margin: 0; padding: 20px; text-align: center; }
+        h1 { color: #ff3e6c; margin-bottom: 5px; font-size: 2.5rem; }
+        p { color: #8a8ab0; margin-bottom: 30px; }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .game-card { background-color: #1a1a2e; border-radius: 12px; padding: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: transform 0.2s, border-color 0.2s; cursor: pointer; text-decoration: none; color: white; display: flex; flex-direction: column; border: 2px solid transparent; }
+        .game-card:hover { transform: translateY(-5px); border-color: #ff3e6c; box-shadow: 0 6px 20px rgba(255, 62, 108, 0.4); }
+        .game-card img { width: 100%; border-radius: 8px; height: 135px; object-fit: cover; }
+        .game-card h3 { margin: 12px 0 0 0; font-size: 14px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        #loading { font-size: 18px; color: #ff3e6c; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <h1>Crazy Arcade Zone</h1>
+    <p>Play the best free HTML5 games instantly in your web browser!</p>
+
+    <div id="loading">Loading amazing games for you...</div>
+    <div class="game-grid" id="arcade-grid"></div>
+
+    <script>
+        // PASTING YOUR GAME FEED LINK HERE
+        // Note: We use a free proxy (cors-anywhere or similar) if needed, but GameMonetize feeds usually allow direct fetching.
+        const feedUrl = 'https://gamemonetize.com/feed.php?format=0&num=200&page=1';
+
+        async function loadGames() {
+            try {
+                const response = await fetch(feedUrl);
+                const games = await response.json();
+                
+                const grid = document.getElementById('arcade-grid');
+                const loadingText = document.getElementById('loading');
+                
+                // Clear loading text
+                loadingText.style.display = 'none';
+
+                // Loop through all games in the feed data
+                games.forEach(game => {
+                    // Create card element
+                    const card = document.createElement('a');
+                    card.className = 'game-card';
+                    
+                    // Convert standard play URLs to the iframe compatible format automatically
+                    const gameId = game.code; 
+                    const cleanDeployUrl = `https://gamemonetize.com{gameId}/`;
+                    
+                    card.href = `player.html?game=${cleanDeployUrl}`;
+
+                    // Set up inner content
+                    card.innerHTML = `
+                        <img src="${game.thumb}" alt="${game.title}" loading="lazy">
+                        <h3>${game.title}</h3>
+                    `;
+                    
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error fetching games:', error);
+                document.getElementById('loading').innerText = 'Failed to load games. Please refresh the page.';
+            }
+        }
+
+        // Start loading the games immediately when the page displays
+        loadGames();
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Arcade Portal | Play Online Games</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #111; color: #fff; margin: 0; padding: 20px; text-align: center; }
