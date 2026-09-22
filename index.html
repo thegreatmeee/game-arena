@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Arcade Portal | Play Online Games</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #111; color: #fff; margin: 0; padding: 20px; text-align: center; }
+        h1 { color: #ff3e6c; }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; max-width: 1200px; margin: 30px auto; }
+        .game-card { background-color: #222; border-radius: 8px; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); transition: transform 0.2s; cursor: pointer; text-decoration: none; color: white; display: block; }
+        .game-card:hover { transform: scale(1.05); border: 2px solid #ff3e6c; }
+        .game-card img { width: 100%; border-radius: 6px; height: 150px; object-fit: cover; }
+        .game-card h3 { margin: 10px 0 0 0; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+    <h1>Crazy Arcade Zone</h1>
+    <p>Play the best free HTML5 games right in your web browser!</p>
+
+    <div class="game-grid">
+        <!-- Game 1 -->
+        <a href="player.html?game=https://html5.gamedistribution.com/268e3f7dc6e6481298fafa5f3cf9e911/" class="game-card">
+            <img src="https://placehold.co" alt="Game 1">
+            <h3>Offroad Racing 3D</h3>
+        </a>
+
+        <!-- Game 2 -->
+        <a href="player.html?game=https://gamedistribution.com" class="game-card">
+            <img src="https://placehold.co" alt="Game 2">
+            <h3>Bubble Shooter Pro</h3>
+        </a>
+    </div>
+
+</body>
+</html>
