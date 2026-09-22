@@ -39,27 +39,25 @@
                 
                 // Clear loading text
                 loadingText.style.display = 'none';
+        games.forEach(game => {
+            // Create card element
+            const card = document.createElement('a');
+            card.className = 'game-card';
+            
+             const gameId = game.id;
+             const cleanDeployUrl = `https://gamemonetize.com{gameId}/`;
+            
+             const cleanDeployUrl = `https://gamemonetize.com{gameId}/`;
 
-                // Loop through all games in the feed data
-                games.forEach(game => {
-                    // Create card element
-                    const card = document.createElement('a');
-                    card.className = 'game-card';
-                    
-                    // Convert standard play URLs to the iframe compatible format automatically
-                    const gameId = game.code; 
-                    const cleanDeployUrl = `https://gamemonetize.com{gameId}/`;
-                    
-                    card.href = `player.html?game=${cleanDeployUrl}`;
+            // Set up inner content
+            card.innerHTML = `
+                <img src="${game.thumb}" alt="${game.title}" loading="lazy">
+                <h3>${game.title}</h3>
+            `;
 
-                    // Set up inner content
-                    card.innerHTML = `
-                        <img src="${game.thumb}" alt="${game.title}" loading="lazy">
-                        <h3>${game.title}</h3>
-                    `;
-                    
-                    grid.appendChild(card);
-                });
+            grid.appendChild(card);
+        });
+
             } catch (error) {
                 console.error('Error fetching games:', error);
                 document.getElementById('loading').innerText = 'Failed to load games. Please refresh the page.';
